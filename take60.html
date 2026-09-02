@@ -1,4 +1,5 @@
 <title>Take 60</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ093R5BF8"></script>
 <script>
@@ -101,7 +102,8 @@ body{
   font-family:var(--f-display);
   font-variation-settings:'wdth' 100;
   -webkit-font-smoothing:antialiased;
-  min-height:100dvh;
+  height:100dvh;
+  overflow:hidden;
   display:flex;
   flex-direction:column;
 }
@@ -119,7 +121,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 /* ---------- top bar ---------- */
 .bar{
   display:flex;align-items:center;gap:14px;
-  padding:14px 18px;
+  padding:11px 18px;
   border-bottom:1px solid var(--line);
   background:var(--surface);
   flex:0 0 auto;
@@ -138,6 +140,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .bar .spacer{flex:1}
 .count{color:var(--muted);white-space:nowrap}
 .count b{color:var(--ink);font-weight:500}
+@media (max-width:460px){
+  .bar{gap:8px;padding:10px 12px}
+  .mark small{display:none}
+  .count{display:none}
+}
 .ghost{
   border:1px solid var(--line);border-radius:999px;
   padding:7px 13px;color:var(--muted);
@@ -180,9 +187,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 /* ---------- stage ---------- */
 .stage{
   flex:1;
+  min-height:0;
+  overflow-y:auto;
   display:flex;flex-direction:column;align-items:center;
-  gap:clamp(18px,3.2vh,32px);
-  padding:clamp(20px,4vh,44px) 18px clamp(26px,5vh,52px);
+  gap:clamp(12px,2.2vh,22px);
+  padding:clamp(12px,2.5vh,28px) 18px clamp(16px,3vh,32px);
   width:100%;max-width:840px;margin:0 auto;
   justify-content:center;
 }
@@ -210,10 +219,10 @@ body.researching .ring .prog{stroke:var(--mkt)}
   border:1px solid var(--line);
   border-radius:6px;
   box-shadow:var(--shadow);
-  padding:clamp(24px,4vw,40px);
-  min-height:clamp(210px,32vh,290px);
+  padding:clamp(20px,3vw,32px);
+  min-height:clamp(180px,26vh,240px);
   display:flex;flex-direction:column;justify-content:center;align-items:center;
-  gap:20px;text-align:center;
+  gap:16px;text-align:center;
   position:relative;overflow:hidden;
   transition:padding .35s ease, min-height .35s ease;
 }
@@ -238,14 +247,17 @@ body.timing .card{
 
 .topic{
   margin:0;
-  font-size:clamp(28px,6.2vw,54px);
-  line-height:1.02;
+  font-size:clamp(24px,5vw,44px);
+  line-height:1.05;
   font-weight:800;
   font-variation-settings:'wdth' 118,'wght' 800;
   letter-spacing:-.025em;
   text-wrap:balance;
-  max-width:16ch;
+  max-width:20ch;
   transition:font-size .35s ease, max-width .35s ease;
+}
+@media (min-width:760px){
+  .topic{max-width:26ch}
 }
 body.timing .topic{
   font-size:clamp(14px,2.3vw,18px);
@@ -353,7 +365,7 @@ body.warn .clock{animation:flick .9s steps(2,end) infinite}
 
 .credit{
   flex:0 0 auto;text-align:center;
-  padding:16px 18px;color:var(--faint);
+  padding:10px 18px;color:var(--faint);
 }
 .credit a{
   display:inline-flex;align-items:center;gap:5px;
@@ -420,6 +432,7 @@ body.warn .clock{animation:flick .9s steps(2,end) infinite}
     transform:translateX(101%);
   }
   .panel.open{transform:translateX(0)}
+  .stage{overflow:hidden}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
